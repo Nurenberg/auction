@@ -4,13 +4,24 @@ declare(strict_types=1);
 
 namespace App\Http;
 
-use Psr\Http\Message\ResponseInterface;
+use Slim\Psr7\Factory\StreamFactory;
+use Slim\Psr7\Headers;
+use Slim\Psr7\Response;
 
-class JsonResponse
+class JsonResponse extends Response
 {
-    public static function json(ResponseInterface $response, $data): ResponseInterface
+    /**
+     * JsonResponse constructor.
+     * @param mixed $data
+     * @param int $status
+     * @throws \JsonException
+     */
+    public function __construct($data, int $status = 200)
     {
-        $response->getBody()->write(json_encode($data, JSON_THROW_ON_ERROR));
-        return $response->withHeader('Content-Type', 'application/json');
+        parent::__construct(
+            $status,
+            new Headers(['Content-Type' => 'application/json']),
+            (new StreamFactory())->createStream(json_encode($data, JSON_THROW_ON_ERROR))
+        );
     }
 }

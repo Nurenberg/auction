@@ -2,6 +2,11 @@
 
 declare(strict_types=1);
 
-header('Content-Type: application/json');
+http_response_code(500);
 
-echo json_encode(['pool' => 'myMoney']);
+require __DIR__ . '/../vendor/autoload.php';
+
+$container = require __DIR__ . '/../config/container.php';
+
+$app = (require __DIR__ . '/../config/app.php')($container);
+$app->run();

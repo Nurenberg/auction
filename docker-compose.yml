@@ -29,6 +29,10 @@ services:
     build:
       context: api/docker
       dockerfile: development/php-fpm/Dockerfile
+    environment:
+      PHP_IDE_CONFIG: serverName=API
+      APP_ENV: dev
+      APP_DEBUG: 1
     volumes:
     - ./api:/app
 
@@ -36,5 +40,16 @@ services:
     build:
       context: api/docker
       dockerfile: development/php-cli/Dockerfile
+    environment:
+      PHP_IDE_CONFIG: serverName=API
+      APP_ENV: dev
+      APP_DEBUG: 1
     volumes:
       - ./api:/app
+
+networks:
+  default:
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.22.0.0/16
