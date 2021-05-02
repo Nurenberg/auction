@@ -1,6 +1,7 @@
 {
   "name": "horizontalwalk/auction",
   "type": "project",
+  "description": "auction",
   "license": "BSD-3-Clause",
   "config": {
     "process-timeout": 0,
@@ -15,6 +16,7 @@
   },
   "require-dev": {
     "overtrue/phplint": "^2.3",
+    "phpunit/phpunit": "^9.5",
     "roave/security-advisories": "dev-master",
     "squizlabs/php_codesniffer": "^3.6",
     "vimeo/psalm": "^4.7"
@@ -24,11 +26,18 @@
       "App\\": "src/"
     }
   },
+  "autoload-dev": {
+    "psr-4": {
+      "Test\\": "tests/"
+    }
+  },
   "scripts": {
     "lint": "phplint",
     "cs-check": "phpcs",
     "cs-fix": "phpcbf",
     "psalm": "psalm",
+    "test": "phpunit --colors=always",
+    "test-coverage": "phpunit --colors=always --testsuite=unit --coverage-xml var/coverage.xml",
     "app": "php bin/app.php --ansi"
   }
 }
