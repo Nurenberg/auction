@@ -2,13 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Auth\Command\ChangePassword;
+namespace App\Auth\Command\ChangePassword;
 
 use App\Auth\Entity\User\Id;
 use App\Auth\Entity\User\UserRepository;
 use App\Auth\Service\PasswordHasher;
 use App\Flusher;
-use DomainException;
 
 class Handler
 {

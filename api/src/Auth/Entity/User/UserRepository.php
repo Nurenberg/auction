@@ -33,4 +33,6 @@ interface UserRepository
     public function findByPasswordResetToken(string $token): ?User;
 
     public function findByNewEmailToken(string $token): ?User;
+
+    public function remove(User $user): void;
 }

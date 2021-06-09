@@ -5,10 +5,8 @@ declare(strict_types=1);
 namespace App\Auth\Command\AttachNetwork;
 
 use App\Auth\Command\JoinByNetwork\Command;
-use App\Auth\Entity\User\Email;
 use App\Auth\Entity\User\Id;
 use App\Auth\Entity\User\NetworkIdentity;
-use App\Auth\Entity\User\User;
 use App\Auth\Entity\User\UserRepository;
 use App\Flusher;
 use DomainException;

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Auth\Command\ChangeEmail\Confirm;
+namespace App\Auth\Command\ChangeEmail\Confirm;
 
 class Command
 {

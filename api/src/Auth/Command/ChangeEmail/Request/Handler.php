@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Auth\Command\ChangeEmail\Request;
+namespace App\Auth\Command\ChangeEmail\Request;
 
 use App\Auth\Entity\User\Email;
 use App\Auth\Entity\User\Id;

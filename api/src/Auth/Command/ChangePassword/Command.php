@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Auth\Command\ChangePassword;
+namespace App\Auth\Command\ChangePassword;
 
 class Command
 {

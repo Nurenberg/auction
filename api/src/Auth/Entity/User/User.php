@@ -21,6 +21,7 @@ class User
     private ?Token $passwordResetToken = null;
     private ?Token $newEmailToken = null;
     private ?Email $newEmail = null;
+    private Role $role;
 
     public function __construct(
         Id $id,
@@ -32,6 +33,7 @@ class User
         $this->date = $date;
         $this->email = $email;
         $this->status = $status;
+        $this->role = Role::user();
         $this->networks = new ArrayObject();
     }
 
@@ -144,6 +146,17 @@ class User
         return $this;
     }
 
+    public function getRole(): Role
+    {
+        return $this->role;
+    }
+
+    public function setRole(Role $role): self
+    {
+        $this->role = $role;
+
+        return $this;
+    }
 
     public function attachNetwork(NetworkIdentity $identity): void
     {
@@ -218,5 +231,17 @@ class User
         $this->email = $this->newEmail;
         $this->newEmailToken = null;
         $this->newEmail = null;
+    }
+
+    public function changeRole(Role $role): void
+    {
+        $this->role = $role;
+    }
+
+    public function remove(): void
+    {
+        if (!$this->isWait()) {
+            throw new DomainException('Unable to remove active user.');
+        }
     }
 }

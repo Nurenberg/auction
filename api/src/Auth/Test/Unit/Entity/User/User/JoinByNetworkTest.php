@@ -8,6 +8,7 @@ use App\Auth\Entity\User\Email;
 use App\Auth\Entity\User\Id;
 use App\Auth\Entity\User\NetworkIdentity;
 use App\Auth\Entity\User\User;
+use App\Auth\Entity\User\Role;
 use DateTimeImmutable;
 use PHPUnit\Framework\TestCase;
 
@@ -33,6 +34,8 @@ class JoinByNetworkTest extends TestCase
 
         self::assertFalse($user->isWait());
         self::assertTrue($user->isActive());
+
+        self::assertEquals(Role::USER, $user->getRole()->getName());
 
         self::assertCount(1, $user->getNetworks());
         self::assertSame($network, $user->getNetworks()[0] ?? null);

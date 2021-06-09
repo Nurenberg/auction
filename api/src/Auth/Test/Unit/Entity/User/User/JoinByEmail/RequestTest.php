@@ -8,6 +8,7 @@ use App\Auth\Entity\User\Email;
 use App\Auth\Entity\User\Id;
 use App\Auth\Entity\User\User;
 use App\Auth\Service\Tokenizer;
+use App\Auth\Entity\User\Role;
 use DateInterval;
 use DateTimeImmutable;
 use PHPUnit\Framework\TestCase;
@@ -40,5 +41,7 @@ class RequestTest extends TestCase
 
         $this->assertTrue($user->isWait());
         $this->assertFalse($user->isActive());
+
+        self::assertEquals(Role::USER, $user->getRole()->getName());
     }
 }

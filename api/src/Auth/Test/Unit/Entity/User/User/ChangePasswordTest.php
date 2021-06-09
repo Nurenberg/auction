@@ -4,13 +4,8 @@ declare(strict_types=1);
 
 namespace Auth\Test\Unit\Entity\User\User;
 
-use App\Auth\Entity\User\Email;
-use App\Auth\Entity\User\Id;
-use App\Auth\Entity\User\NetworkIdentity;
-use App\Auth\Entity\User\User;
 use App\Auth\Service\PasswordHasher;
 use App\Auth\Test\Builder\UserBuilder;
-use DateTimeImmutable;
 use PHPUnit\Framework\TestCase;
 
 class ChangePasswordTest extends TestCase
