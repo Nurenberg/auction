@@ -14,7 +14,7 @@ class User
 {
     private Id $id;
     private Email $email;
-    private ?string $hash = null;
+    private ?string $passwordHash = null;
     private DateTimeImmutable $date;
     private ?Token $joinConfirmToken = null;
     private Status $status;
@@ -42,7 +42,7 @@ class User
         Token $joinConfirmToken
     ): self {
         $user = new User($id, $date, $email, Status::wait());
-        $user->hash = $hash;
+        $user->passwordHash = $hash;
         $user->joinConfirmToken = $joinConfirmToken;
 
         return $user;
@@ -69,9 +69,9 @@ class User
         return $this->email;
     }
 
-    public function getHash(): string
+    public function getPasswordHash(): ?string
     {
-        return $this->hash;
+        return $this->passwordHash;
     }
 
     public function getDate(): DateTimeImmutable
@@ -151,6 +151,19 @@ class User
         }
         $this->passwordResetToken->validate($token, $date);
         $this->passwordResetToken = null;
-        $this->hash = $hash;
+        $this->passwordHash = $hash;
+    }
+
+    public function changePassword(string $current, string $new, PasswordHasher $hasher): void
+    {
+        if (!$this->getPasswordHash()) {
+            throw new DomainException('User does not have an old password.');
+        }
+
+        if (!$hasher->validate($current, $new)) {
+            throw new DomainException('Incorrect current password');
+        }
+
+        $this->passwordHash = $hasher->hash($new);
     }
 }

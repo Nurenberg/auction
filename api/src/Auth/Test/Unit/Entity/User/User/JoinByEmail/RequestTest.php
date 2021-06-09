@@ -35,7 +35,7 @@ class RequestTest extends TestCase
         $this->assertEquals($id, $user->getId());
         $this->assertEquals($email, $user->getEmail());
         $this->assertEquals($date, $user->getDate());
-        $this->assertEquals($hash, $user->getHash());
+        $this->assertEquals($hash, $user->getPasswordHash());
         $this->assertEquals($token, $user->getJoinConfirmToken());
 
         $this->assertTrue($user->isWait());

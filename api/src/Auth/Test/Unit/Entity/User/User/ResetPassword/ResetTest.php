@@ -29,7 +29,7 @@ class ResetTest extends TestCase
         $user->resetPassword($token->getValue(), $now, $hash);
 
         self::assertNull($user->getPasswordResetToken());
-        self::assertEquals($hash, $user->getHash());
+        self::assertEquals($hash, $user->getPasswordHash());
 
     }
 
