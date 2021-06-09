@@ -81,6 +81,9 @@
       <path value="$PROJECT_DIR$/api/vendor/phpunit/php-file-iterator" />
       <path value="$PROJECT_DIR$/api/vendor/phpspec/prophecy" />
       <path value="$PROJECT_DIR$/api/vendor/doctrine/instantiator" />
+      <path value="$PROJECT_DIR$/api/vendor/ramsey/collection" />
+      <path value="$PROJECT_DIR$/api/vendor/ramsey/uuid" />
+      <path value="$PROJECT_DIR$/api/vendor/brick/math" />
     </include_path>
   </component>
   <component name="PhpInterpreters">
