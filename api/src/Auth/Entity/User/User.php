@@ -7,7 +7,6 @@ namespace App\Auth\Entity\User;
 use App\Auth\Service\PasswordHasher;
 use ArrayObject;
 use DateTimeImmutable;
-use Doctrine\Instantiator\Exception\InvalidArgumentException;
 use DomainException;
 
 class User
@@ -20,6 +19,8 @@ class User
     private Status $status;
     private ArrayObject $networks;
     private ?Token $passwordResetToken = null;
+    private ?Token $newEmailToken = null;
+    private ?Email $newEmail = null;
 
     public function __construct(
         Id $id,
@@ -119,6 +120,31 @@ class User
         return $this->passwordResetToken;
     }
 
+    public function getNewEmailToken(): ?Token
+    {
+        return $this->newEmailToken;
+    }
+
+    public function setNewEmailToken(?Token $newEmailToken): self
+    {
+        $this->newEmailToken = $newEmailToken;
+
+        return $this;
+    }
+
+    public function getNewEmail(): ?Email
+    {
+        return $this->newEmail;
+    }
+
+    public function setNewEmail(?Email $newEmail): self
+    {
+        $this->newEmail = $newEmail;
+
+        return $this;
+    }
+
+
     public function attachNetwork(NetworkIdentity $identity): void
     {
         /** @var NetworkIdentity $network */
@@ -165,5 +191,32 @@ class User
         }
 
         $this->passwordHash = $hasher->hash($new);
+    }
+
+    public function requestEmailChanging(Token $token, DateTimeImmutable $date, Email $email): void
+    {
+        if (!$this->isActive()) {
+            throw new DomainException('User is not active.');
+        }
+        if ($this->email->isEqualTo($email)) {
+            throw new DomainException('Email is already same.');
+        }
+        if ($this->newEmailToken !== null && !$this->newEmailToken->isExpiredTo($date)) {
+            throw new DomainException('Changing is already requested.');
+        }
+        $this->newEmail = $email;
+        $this->newEmailToken = $token;
+    }
+
+    public function confirmEmailChanging(string $token, DateTimeImmutable $date): void
+    {
+        if (is_null($this->newEmailToken) || is_null($this->newEmail)) {
+            throw new DomainException('Changing is not requested.');
+        }
+
+        $this->newEmailToken->validate($token, $date);
+        $this->email = $this->newEmail;
+        $this->newEmailToken = null;
+        $this->newEmail = null;
     }
 }
