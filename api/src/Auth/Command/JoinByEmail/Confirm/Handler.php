@@ -22,7 +22,7 @@ class Handler
 
     public function handle(Command $command): void
     {
-        $user = $this->users->findByConfirmToken($command->token);
+        $user = $this->users->findByJoinConfirmToken($command->token);
 
         if (!$user) {
             throw new DomainException('Incorrect token');

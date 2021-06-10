@@ -11,7 +11,7 @@ class Status
 
     private string $name;
 
-    private function __construct(string $name)
+    public function __construct(string $name)
     {
         $this->name = $name;
     }
@@ -34,5 +34,10 @@ class Status
     public function isActive(): bool
     {
         return $this->name == self::ACTIVE;
+    }
+
+    public function getName(): string
+    {
+        return $this->name;
     }
 }

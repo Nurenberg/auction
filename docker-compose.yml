@@ -36,7 +36,7 @@ services:
       APP_DEBUG: 1
       DB_HOST: api-postgres
       DB_USER: app
-      DB_PASSWORD: ${API_DB_PASSWORD}
+      DB_PASSWORD: secret
       DB_NAME: app
     volumes:
     - ./api:/app
@@ -52,7 +52,7 @@ services:
       APP_DEBUG: 1
       DB_HOST: api-postgres
       DB_USER: app
-      DB_PASSWORD: ${API_DB_PASSWORD}
+      DB_PASSWORD: secret
       DB_NAME: app
     volumes:
       - ./api:/app
