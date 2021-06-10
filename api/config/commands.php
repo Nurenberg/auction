@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+use App\Console\HelloCommand;
+
 return [
-    \App\Console\HelloCommand::class,
+    HelloCommand::class,
 ];
