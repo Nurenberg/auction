@@ -2,7 +2,7 @@ init: docker-down-clear docker-pull docker-build docker-up api-init
 up: docker-up
 down: docker-down
 restart: down up
-check: lint analyze test
+check: lint analyze test api-validate-schema
 lint: api-lint
 analyze: api-analyze
 test: api-test
@@ -21,6 +21,9 @@ docker-pull:
 docker-build:
 	docker-compose build
 
+api-clear:
+	docker run --rm -v ${PWD}/api:/api -w /app alpine sh -c 'rm -rf var/*'
+
 api-lint:
 	docker-compose run --rm api-php-cli composer lint
 	docker-compose run --rm api-php-cli composer cs-check
@@ -37,10 +40,22 @@ api-test-unit:
 api-test-functional:
 	docker-compose run --rm api-php-cli composer test -- --testsuite=functional
 
-api-init: api-composer-install
+api-init: api-composer-install api-wait-db api-migrations api-fixtures
 
 api-composer-install:
 	docker-compose run --rm api-php-cli composer install
+
+api-migrations:
+	docker-compose run --rm api-php-cli composer app migrations:migrate --no-interaction
+
+api-fixtures:
+	docker-compose run --rm api-php-cli composer app fixtures:load
+
+api-validate-schema:
+	docker-compose run --rm api-php-cli composer app orm:validate-schema
+
+api-wait-db:
+	docker-compose run --rm api-php-cli wait-for-it api-postgres:5432 -t 30
 
 build: build-gateway build-frontend build-api
 

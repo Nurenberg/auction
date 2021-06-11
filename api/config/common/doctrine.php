@@ -5,6 +5,7 @@ declare(strict_types=1);
 use Doctrine\Common\Cache\ArrayCache;
 use Doctrine\Common\Cache\FilesystemCache;
 use Doctrine\Common\Cache\Psr6\DoctrineProvider;
+use Doctrine\Common\EventManager;
 use Doctrine\DBAL\Types\Type;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
@@ -48,9 +49,17 @@ return [
             }
         }
 
+        $eventManager = new EventManager();
+
+        foreach ($settings['subscribers'] as $name) {
+            $subscriber = $container->get($name);
+            $eventManager->addEventSubscriber($subscriber);
+        }
+
         return EntityManager::create(
             $settings['connection'],
-            $config
+            $config,
+            $eventManager
         );
     },
 
@@ -67,6 +76,7 @@ return [
                 'dbname' => getenv('DB_NAME'),
                 'charset' => 'utf-8',
             ],
+            'subscribers' => [],
             'metadata_dirs' => [
                 __DIR__ . '/../../src/Auth/Entity'
             ],

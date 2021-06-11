@@ -110,6 +110,7 @@
       <path value="$PROJECT_DIR$/api/vendor/brick/varexporter" />
       <path value="$PROJECT_DIR$/api/vendor/laminas/laminas-stdlib" />
       <path value="$PROJECT_DIR$/api/vendor/laminas/laminas-config-aggregator" />
+      <path value="$PROJECT_DIR$/api/vendor/doctrine/data-fixtures" />
     </include_path>
   </component>
   <component name="PhpInterpreters">

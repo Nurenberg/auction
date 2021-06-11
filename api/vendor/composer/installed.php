@@ -118,6 +118,15 @@
             'reference' => 'a036d90c303f3163b5be8b8fde9b6755b2be4a3a',
             'dev_requirement' => false,
         ),
+        'doctrine/data-fixtures' => array(
+            'pretty_version' => '1.5.0',
+            'version' => '1.5.0.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../doctrine/data-fixtures',
+            'aliases' => array(),
+            'reference' => '51d3d4880d28951fff42a635a2389f8c63baddc5',
+            'dev_requirement' => true,
+        ),
         'doctrine/dbal' => array(
             'pretty_version' => '2.13.1',
             'version' => '2.13.1.0',
