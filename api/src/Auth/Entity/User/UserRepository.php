@@ -6,6 +6,7 @@ namespace App\Auth\Entity\User;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityRepository;
+use Doctrine\Persistence\ObjectRepository;
 use DomainException;
 
 class UserRepository
@@ -13,11 +14,9 @@ class UserRepository
     private EntityRepository $repo;
     private EntityManagerInterface $entityManager;
 
-    public function __construct(EntityManagerInterface $entityManager)
+    public function __construct(EntityManagerInterface $entityManager, ObjectRepository $repository)
     {
-        /** @var EntityRepository $repo */
-        $repo = $entityManager->getRepository(User::class);
-        $this->repo = $repo;
+        $this->repo = $repository;
         $this->entityManager = $entityManager;
     }
 

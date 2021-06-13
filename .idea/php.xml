@@ -111,6 +111,13 @@
       <path value="$PROJECT_DIR$/api/vendor/laminas/laminas-stdlib" />
       <path value="$PROJECT_DIR$/api/vendor/laminas/laminas-config-aggregator" />
       <path value="$PROJECT_DIR$/api/vendor/doctrine/data-fixtures" />
+      <path value="$PROJECT_DIR$/api/vendor/egulias/email-validator" />
+      <path value="$PROJECT_DIR$/api/vendor/symfony/polyfill-intl-idn" />
+      <path value="$PROJECT_DIR$/api/vendor/symfony/polyfill-php72" />
+      <path value="$PROJECT_DIR$/api/vendor/symfony/polyfill-iconv" />
+      <path value="$PROJECT_DIR$/api/vendor/swiftmailer/swiftmailer" />
+      <path value="$PROJECT_DIR$/api/vendor/finesse/swiftmailer-defaults-plugin" />
+      <path value="$PROJECT_DIR$/api/vendor/twig/twig" />
     </include_path>
   </component>
   <component name="PhpInterpreters">
